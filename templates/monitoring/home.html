@@ -21,25 +21,25 @@
             </tr>
             </thead>
             <tbody>
-            {% for asin in asins %}
+            {% for item in asins %}
                 <tr>
                     <td><p>{{ forloop.counter }}</p></td>
-                    <td><p>{{ asin.asin }}</p></td>
-                    <td><p>X</p></td>
-                    <td><p>Y</p></td>
+                    <td><p>{{ item.asin_obj.asin }}</p></td>
+                    <td><p>{{ item.num_of_offers }}</p></td>
+                    <td><p>{{ item.buybox_winner }}</p></td>
                     <td>
-                        <a href="{% url 'delete-asin' asin.id %}" class="btn btn-sm btn-danger">
+                        <a href="{% url 'delete-asin' item.asin_obj.id %}" class="btn btn-sm btn-danger">
                             Delete
                         </a>
                     </td>
                     {% if asin.is_running %}
                         <td>
-                            <a class="btn  btn-sm btn-danger" href="{% url 'switch-api' asin.id %}" role="button">Turn
+                            <a class="btn  btn-sm btn-danger" href="{% url 'switch-api' item.asin_obj.id %}" role="button">Turn
                                 OFF</a>
                         </td>
                     {% else %}
                         <td>
-                            <a class="btn btn-sm btn-success" href="{% url 'switch-api' asin.id %}" role="button">Turn
+                            <a class="btn btn-sm btn-success" href="{% url 'switch-api' item.asin_obj.id %}" role="button">Turn
                                 ON</a>
                         </td>
                     {% endif %}

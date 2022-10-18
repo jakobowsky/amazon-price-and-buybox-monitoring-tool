@@ -6,6 +6,12 @@ from django.shortcuts import redirect
 
 def asin_view(request):
     asins = Asin.objects.all().order_by("created_at")
+    asins_list = []
+    for asin in asins:
+        asins_list.append(
+            {'asin_obj': asin, 'num_of_offers': asin.data_rows.count(),
+             'buybox_winner': asin.data_rows.filter(is_buy_box_winner=True).order_by("-created_at").first().listing_price}
+        )
     if request.method == "POST":
         form = AsinForm(request.POST)
         if form.is_valid():
@@ -15,9 +21,9 @@ def asin_view(request):
 
     else:
         form = AsinForm()
-
+    print(asins_list)
     return render(
-        request, "monitoring/home.html", context={"asins": asins, "form": form}
+        request, "monitoring/home.html", context={"asins": asins_list, "form": form}
     )
 
 
