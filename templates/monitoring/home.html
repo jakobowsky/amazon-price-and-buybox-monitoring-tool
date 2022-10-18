@@ -32,7 +32,7 @@
                             Delete
                         </a>
                     </td>
-                    {% if asin.is_running %}
+                    {% if item.asin_obj.is_running %}
                         <td>
                             <a class="btn  btn-sm btn-danger" href="{% url 'switch-api' item.asin_obj.id %}" role="button">Turn
                                 OFF</a>
