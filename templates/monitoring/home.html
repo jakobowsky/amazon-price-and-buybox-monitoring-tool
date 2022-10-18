@@ -1,0 +1,64 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="w-50 mx-auto">
+
+
+        <h4 class="text-center pb-2 pt-3">Table with asins</h4>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Number ﹟</th>
+                <th scope="col">Asin 🛒</th>
+                <th scope="col">Number of offers</th>
+                <th scope="col">BuyBox winner</th>
+                <th scope="col">Delete ❌</th>
+                <th scope="col">Switch 🎚</th>
+
+
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for asin in asins %}
+                <tr>
+                    <td><p>{{ forloop.counter }}</p></td>
+                    <td><p>{{ asin.asin }}</p></td>
+                    <td><p>X</p></td>
+                    <td><p>Y</p></td>
+                    <td>
+                        <a href="{% url 'delete-asin' asin.id %}" class="btn btn-sm btn-danger">
+                            Delete
+                        </a>
+                    </td>
+                    {% if asin.is_running %}
+                        <td>
+                            <a class="btn  btn-sm btn-danger" href="{% url 'switch-api' asin.id %}" role="button">Turn
+                                OFF</a>
+                        </td>
+                    {% else %}
+                        <td>
+                            <a class="btn btn-sm btn-success" href="{% url 'switch-api' asin.id %}" role="button">Turn
+                                ON</a>
+                        </td>
+                    {% endif %}
+
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="text-center">
+            <form action="/" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <input class="btn btn-sm btn-primary" type="submit" value="Add Asin">
+            </form>
+        </div>
+
+
+    </div>
+
+{% endblock content %}

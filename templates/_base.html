@@ -1,0 +1,48 @@
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <title>{% block title %}Amazon buybox and price monitoring tool{% endblock title %}</title>
+    <meta name="description" content="TODO">
+    <meta name="author" content="">
+
+    {% block css %}
+    <style>
+        body {
+            background-color: #F3F3F3;
+        }
+    </style>
+    {% endblock %}
+</head>
+
+<body>
+
+<div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        <ul class="nav nav-pills">
+            <h2>Amazon Buy Box and Price monitoring tool 📊</h2>
+        </ul>
+    </header>
+    {% block content %}
+    {% endblock content %}
+</div>
+
+
+{% block javascript %}
+
+<!-- 3rd party JavaScript -->
+
+<!-- Project JS -->
+<script src="{% static 'js/base.js' %}"></script>
+
+{% endblock javascript %}
+
+</body>
+</html>

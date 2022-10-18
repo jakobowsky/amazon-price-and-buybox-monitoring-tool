@@ -9,11 +9,17 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import environ
 from pathlib import Path
+
+env = environ.Env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+APPS_DIR = environ.Path(__file__) - 2
+env_file = str(APPS_DIR.path(".env"))
+env.read_env(env_file)
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -36,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Third-party
+    "bootstrap5",
+    "crispy_forms",
     # Local
     'monitoring'
 ]
@@ -55,7 +63,7 @@ ROOT_URLCONF = 'monitoring_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,3 +126,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+REFRESH_TOKEN = env("REFRESH_TOKEN", default="")
+LWA_APP_ID = env("LWA_APP_ID", default="")
+CLIENT_SECRET = env("CLIENT_SECRET", default="")
+AWS_ACCESS_KEY = env("AWS_ACCESS_KEY", default="")
+AWS_SECRET_KEY = env("AWS_SECRET_KEY", default="")
+ROLE_ARN = env("ROLE_ARN", default="")

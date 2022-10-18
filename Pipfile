@@ -6,6 +6,9 @@ name = "pypi"
 [packages]
 python-amazon-sp-api = "*"
 django = "*"
+django-bootstrap-v5 = "*"
+django-crispy-forms = "*"
+django-environ = "*"
 
 [dev-packages]
 
