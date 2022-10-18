@@ -8,9 +8,14 @@ def asin_view(request):
     asins = Asin.objects.all().order_by("created_at")
     asins_list = []
     for asin in asins:
+        try:
+            buybox_winner = asin.data_rows.filter(is_buy_box_winner=True).order_by("-created_at").first().listing_price
+        except:
+            buybox_winner = 0
+
         asins_list.append(
             {'asin_obj': asin, 'num_of_offers': asin.data_rows.count(),
-             'buybox_winner': asin.data_rows.filter(is_buy_box_winner=True).order_by("-created_at").first().listing_price}
+             'buybox_winner': buybox_winner}
         )
     if request.method == "POST":
         form = AsinForm(request.POST)
